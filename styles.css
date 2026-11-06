@@ -5,3 +5,196 @@
 .importar{margin-top:20px;padding:22px 25px;border-radius:18px;background:#fff1e8;display:flex;align-items:center;gap:18px;flex-wrap:wrap}.importar div{flex:1}.importar h3{margin:0 0 6px;color:var(--azul);font:700 16px Manrope}.importar p{margin:0;color:#77898d;font-size:12px}.secundario{background:white;color:var(--azul);border:1px solid #f4c4a9}.importar #resultadoImportacao{width:100%;font-size:12px;color:var(--verde)}.biomas{background:#f5faf5;margin:0 calc((1180px - 100vw)/2);padding:65px max(calc((100vw - 1132px)/2),5%)}.bioma-lista{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.bioma-card{background:white;border:1px solid #e7eee8;border-radius:18px;padding:20px}.bioma-desenho{font-size:35px;height:54px}.bioma-card h3{font:700 17px Manrope;color:var(--azul);margin:9px 0}.bioma-card p{font-size:12px;line-height:1.7;color:#7a8d8c;margin:0}.amazonia{border-top:4px solid #459b78}.cerrado{border-top:4px solid #e7b65b}.caatinga{border-top:4px solid #e58d54}.mata{border-top:4px solid #62a7a0}.pantanal{border-top:4px solid #7b9dc5}.pampa{border-top:4px solid #9aa76b}.eventos-layout{display:grid;grid-template-columns:1.3fr .8fr;gap:22px}.lista-eventos,.form-evento{background:white;border:1px solid var(--linha);border-radius:18px;padding:22px}.lista-topo{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:15px}.lista-topo h3,.form-evento h3{font:700 17px Manrope;color:var(--azul);margin:0}.lista-topo input{max-width:200px}.nota{border-bottom:1px solid var(--linha);padding:15px 0}.nota:last-child{border:0}.nota small{color:var(--laranja);font-weight:700}.nota h4{margin:7px 0;color:var(--azul)}.nota p{font-size:13px;line-height:1.6;color:#71858b;margin:0 0 10px}.nota-acoes{display:flex;gap:8px}.nota-acoes button,.botao.texto{background:#eff7f6;color:var(--azul);border:0;padding:7px 11px;border-radius:8px;cursor:pointer;font-size:12px}.nota-acoes .excluir{background:#fff0ed;color:#d45f49}.form-evento{display:flex;flex-direction:column;gap:13px}.form-evento h3{margin-bottom:4px}.form-evento label{font-size:12px}.form-evento textarea{resize:vertical}.botoes-form{display:flex;gap:10px}.form-evento>small{font-size:10px;color:#859698;line-height:1.5}.vazio{font-size:13px;color:#849698}.fontes-lista{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.fontes-lista a{background:white;border:1px solid var(--linha);border-radius:17px;padding:23px;display:flex;flex-direction:column;gap:10px}.fontes-lista b{font:700 17px Manrope;color:var(--azul)}.fontes-lista span{font-size:13px;color:#788b8f;line-height:1.6;min-height:42px}.fontes-lista strong{font-size:12px;color:var(--laranja)}footer{background:#eaf5f2;padding:28px max(calc((100% - 1132px)/2),5%);display:flex;align-items:center;justify-content:space-between;gap:15px}footer p,footer>a:last-child{font-size:12px;color:#71858b}.status-erro{color:#c55b45!important}
 @media(max-width:800px){.topo{padding:0 22px}.menu-mobile{display:block}nav{display:none;position:absolute;top:75px;left:0;right:0;background:white;padding:20px;flex-direction:column;gap:18px;border-bottom:1px solid var(--linha)}nav.aberto{display:flex}.inicio{grid-template-columns:1fr;padding-top:45px}.inicio-texto{padding:0 5px 30px}.paisagem{height:300px}.chamadas{grid-template-columns:1fr 1fr;margin-bottom:55px}.filtros{flex-wrap:wrap}.filtros label{min-width:28%}.biomas{margin:0 -24px;padding:55px 24px}.bioma-lista{grid-template-columns:1fr 1fr}.eventos-layout{grid-template-columns:1fr}.fontes-lista{grid-template-columns:1fr 1fr}footer{flex-wrap:wrap}}
 @media(max-width:520px){main{padding:0 17px}.inicio h1{font-size:42px}.paisagem{height:240px}.chamadas{gap:10px}.chamadas article{padding:16px}.chamadas p{font-size:12px}.titulo-secao{align-items:start}.desenho-sol,.desenho-folha,.desenho-caderno{width:65px;height:65px;font-size:42px;flex-shrink:0;margin-left:10px}.filtros label{min-width:42%}.filtros .botao{width:100%}.graficos{grid-template-columns:1fr}.cartao-grafico.grande{grid-column:auto}.graficos .grafico{height:240px}.bioma-lista,.fontes-lista{grid-template-columns:1fr 1fr}.bioma-card{padding:14px}.lista-topo{align-items:stretch;flex-direction:column}.lista-topo input{max-width:none}footer{padding:25px 18px;flex-direction:column;align-items:flex-start}footer p{margin:0}}
+
+
+/* ===== Melhorias visuais: mais cor, sem mudar a paleta ===== */
+
+/* Cabeçalho com acabamento mais marcante */
+.topo {
+  box-shadow: 0 5px 20px #164b6210;
+  border-bottom: 2px solid var(--azul2);
+}
+.marca-icone {
+  filter: drop-shadow(0 3px 5px #f4774533);
+}
+
+/* Hero: mais profundidade na paisagem */
+.inicio {
+  position: relative;
+}
+.inicio-texto {
+  position: relative;
+  z-index: 1;
+}
+.etiqueta {
+  display: inline-block;
+  padding: 7px 11px;
+  border-radius: 20px;
+  background: #fff0e8;
+}
+.paisagem {
+  box-shadow: 0 18px 38px #164b6220;
+  border: 5px solid #ffffffb8;
+}
+.sol {
+  box-shadow: 0 0 0 16px #ffdf9a55, 0 0 35px #ffc45c66;
+}
+
+/* Cards de destaque: fundos coloridos e interação */
+.chamadas article {
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+.chamadas article:nth-child(1) {
+  background: linear-gradient(145deg, #ffffff, #e2f3ff);
+}
+.chamadas article:nth-child(2) {
+  background: linear-gradient(145deg, #ffffff, #fff0e8);
+}
+.chamadas article:nth-child(3) {
+  background: linear-gradient(145deg, #ffffff, #e7f4e9);
+}
+.chamadas article:nth-child(4) {
+  background: linear-gradient(145deg, #ffffff, #f0eaff);
+}
+.chamadas article:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px #204d5b14;
+  border-color: #dff4f6;
+}
+.icone {
+  box-shadow: 0 5px 12px #164b6210;
+}
+
+/* Seções e títulos */
+.secao {
+  position: relative;
+}
+.titulo-secao h2 {
+  letter-spacing: -.7px;
+}
+.titulo-secao .etiqueta {
+  margin-bottom: 2px;
+}
+.desenho-sol,
+.desenho-folha,
+.desenho-caderno {
+  box-shadow: 0 10px 24px #164b6210;
+}
+
+/* Filtros com mais presença */
+.filtros {
+  background: linear-gradient(110deg, #eff8f7, #dff4f6);
+  border: 1px solid #dcebea;
+  box-shadow: 0 8px 20px #164b6209;
+}
+.filtros select:focus,
+.form-evento input:focus,
+.form-evento select:focus,
+.form-evento textarea:focus,
+.lista-topo input:focus {
+  outline: 2px solid #64c5d0;
+  outline-offset: 1px;
+}
+
+/* Gráficos */
+.cartao-grafico {
+  box-shadow: 0 8px 24px #164b6209;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.cartao-grafico:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 30px #164b6214;
+}
+.cartao-titulo h3 {
+  position: relative;
+}
+.cartao-titulo h3::before {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 17px;
+  margin-right: 9px;
+  vertical-align: -3px;
+  border-radius: 5px;
+  background: var(--laranja);
+}
+.cartao-titulo>b {
+  box-shadow: 0 3px 10px #43866d18;
+}
+
+/* Importação */
+.importar {
+  background: linear-gradient(110deg, #fff1e8, #fff8ed);
+  border: 1px solid #f8dfd0;
+  box-shadow: 0 8px 22px #f4774510;
+}
+
+/* Área dos biomas */
+.biomas {
+  background: linear-gradient(135deg, #f5faf5, #eff8f7);
+}
+.bioma-card {
+  box-shadow: 0 6px 18px #164b6208;
+  transition: transform .22s ease, box-shadow .22s ease;
+}
+.bioma-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 13px 26px #164b6215;
+}
+.amazonia { background: linear-gradient(180deg, #e7f4e9 0, #fff 42%); }
+.cerrado { background: linear-gradient(180deg, #fff2d9 0, #fff 42%); }
+.caatinga { background: linear-gradient(180deg, #fff0e8 0, #fff 42%); }
+.mata { background: linear-gradient(180deg, #e2f3ff 0, #fff 42%); }
+.pantanal { background: linear-gradient(180deg, #eaf0fa 0, #fff 42%); }
+.pampa { background: linear-gradient(180deg, #f0eaff 0, #fff 42%); }
+
+/* Eventos e fontes */
+.lista-eventos,
+.form-evento,
+.fontes-lista a {
+  box-shadow: 0 8px 24px #164b6209;
+  transition: transform .22s ease, box-shadow .22s ease;
+}
+.fontes-lista a:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 28px #164b6215;
+  border-color: #dff4f6;
+}
+.nota small {
+  display: inline-block;
+  padding: 5px 9px;
+  border-radius: 12px;
+  background: #fff0e8;
+}
+.nota-acoes button:hover,
+.botao.texto:hover {
+  filter: brightness(.97);
+  transform: translateY(-1px);
+}
+
+/* Botões */
+.botao {
+  box-shadow: 0 7px 16px #f4774538;
+  transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
+}
+.botao:hover {
+  box-shadow: 0 10px 22px #f4774545;
+}
+.secundario {
+  box-shadow: 0 4px 12px #f4774510;
+}
+
+/* Rodapé com mais contraste, mantendo os tons atuais */
+footer {
+  background: linear-gradient(110deg, #eaf5f2, #dff4f6);
+  border-top: 1px solid #dcebea;
+}
+
+/* Respeita usuários que preferem menos animações */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+  }
+}
