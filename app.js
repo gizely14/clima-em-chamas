@@ -11,15 +11,15 @@ const locais = {
 
 const back4app = {
   url: 'https://parseapi.back4app.com',
-  appId: 'Mn1Xl55Rn5FvR6lgeaqoVHbZuoI6rydvBtvpp8BO',
-  chave: 'X9P8HR53sFONumFyBnoVbyAqsl9z9rW9aWJjUpuX',
+  appId: 'SEU_APP_ID',
+  chave: 'SUA_JAVASCRIPT_KEY',
   classe: 'Anotacoes'
 };
 
 let graficoTemperatura;
 let graficoEstados;
 let graficoBiomas;
-let focos = [];
+let dadosFocos = null;
 let notas = [];
 
 const cores = ['#f47745', '#f5bd58', '#65a88b', '#5da6c7', '#9b83c8', '#e58a9a'];
@@ -41,8 +41,15 @@ function opcoesGrafico() {
     maintainAspectRatio: false,
     plugins: { legend: { display: false } },
     scales: {
-      x: { grid: { display: false } },
-      y: { beginAtZero: false, grid: { color: '#edf1ef' } }
+      x: {
+        grid: { display: false },
+        title: { display: true, text: 'Ano' }
+      },
+      y: {
+        beginAtZero: false,
+        grid: { color: '#edf1ef' },
+        title: { display: true, text: 'Temperatura média (°C)' }
+      }
     }
   };
 }
@@ -93,81 +100,135 @@ async function buscarTemperatura() {
   }
 }
 
-function lerCSV(texto) {
-  const linhas = texto.trim().split(/\r?\n/);
-  const separador = linhas[0].includes(';') ? ';' : ',';
-  const cabecalhos = linhas.shift().toLowerCase().replace(/^\uFEFF/, '').split(separador).map(item => item.trim().replaceAll('"', ''));
-  const estado = cabecalhos.findIndex(item => ['estado', 'uf', 'state'].includes(item));
-  const bioma = cabecalhos.findIndex(item => ['bioma', 'biome'].includes(item));
-  const data = cabecalhos.findIndex(item => ['data', 'datahora', 'date', 'datetime'].includes(item));
-  if (estado < 0) throw new Error('O arquivo precisa ter uma coluna chamada estado ou UF.');
-
-  return linhas.map(linha => {
-    const colunas = linha.split(separador).map(item => item.trim().replaceAll('"', ''));
-    return { estado: colunas[estado], bioma: bioma >= 0 ? colunas[bioma] : '', data: data >= 0 ? colunas[data] : '' };
-  }).filter(item => item.estado);
-}
-
 function nomeEstado(valor) {
-  const estados = { AC: 'Acre', AL: 'Alagoas', AP: 'Amapá', AM: 'Amazonas', BA: 'Bahia', CE: 'Ceará', DF: 'Distrito Federal', ES: 'Espírito Santo', GO: 'Goiás', MA: 'Maranhão', MT: 'Mato Grosso', MS: 'Mato Grosso do Sul', MG: 'Minas Gerais', PA: 'Pará', PB: 'Paraíba', PR: 'Paraná', PE: 'Pernambuco', PI: 'Piauí', RJ: 'Rio de Janeiro', RN: 'Rio Grande do Norte', RS: 'Rio Grande do Sul', RO: 'Rondônia', RR: 'Roraima', SC: 'Santa Catarina', SP: 'São Paulo', SE: 'Sergipe', TO: 'Tocantins' };
+  const estados = {
+    AC: 'Acre', AL: 'Alagoas', AP: 'Amapá', AM: 'Amazonas',
+    BA: 'Bahia', CE: 'Ceará', DF: 'Distrito Federal',
+    ES: 'Espírito Santo', GO: 'Goiás', MA: 'Maranhão',
+    MT: 'Mato Grosso', MS: 'Mato Grosso do Sul',
+    MG: 'Minas Gerais', PA: 'Pará', PB: 'Paraíba',
+    PR: 'Paraná', PE: 'Pernambuco', PI: 'Piauí',
+    RJ: 'Rio de Janeiro', RN: 'Rio Grande do Norte',
+    RS: 'Rio Grande do Sul', RO: 'Rondônia', RR: 'Roraima',
+    SC: 'Santa Catarina', SE: 'Sergipe', TO: 'Tocantins'
+  };
   return estados[valor.toUpperCase()] || valor;
 }
 
+async function carregarFocos() {
+  try {
+    const resposta = await fetch('./data/focos-2025.json');
+    if (!resposta.ok) throw new Error('Não foi possível carregar a base do INPE.');
+    dadosFocos = await resposta.json();
+    mostrarFocos();
+  } catch (erro) {
+    pegar('resultadoImportacao').textContent =
+      'Erro ao carregar os dados do INPE. Verifique se a pasta data foi publicada junto com o site.';
+  }
+}
+
 function mostrarFocos() {
-  const estados = {};
-  const biomas = {};
+  if (!dadosFocos) return;
+
   const anoInicio = Number(pegar('anoInicio').value);
   const anoFim = Number(pegar('anoFim').value);
   const estadoEscolhido = pegar('estado').value;
-  const filtrados = focos.filter(item => {
-    if (estadoEscolhido !== 'Brasil' && nomeEstado(item.estado) !== estadoEscolhido) return false;
-    if (!item.data) return true;
-    const ano = Number((item.data.match(/20\d{2}|19\d{2}/) || [])[0]);
-    return !ano || (ano >= anoInicio && ano <= anoFim);
-  });
+  const anoIncluido = anoInicio <= dadosFocos.ano && anoFim >= dadosFocos.ano;
 
-  filtrados.forEach(item => {
-    const estado = nomeEstado(item.estado);
-    estados[estado] = (estados[estado] || 0) + 1;
-    if (item.bioma) biomas[item.bioma] = (biomas[item.bioma] || 0) + 1;
-  });
+  let listaEstados = [];
+  let listaBiomas = [];
+  let totalFiltrado = 0;
 
-  const listaEstados = Object.entries(estados).sort((a, b) => b[1] - a[1]).slice(0, 10);
+  if (anoIncluido) {
+    if (estadoEscolhido === 'Brasil') {
+      listaEstados = dadosFocos.porEstado.map(item => [item.estado, item.focos]);
+      listaBiomas = dadosFocos.porBioma.map(item => [item.bioma, item.focos]);
+      totalFiltrado = dadosFocos.totalFocos;
+    } else {
+      listaBiomas = dadosFocos.porEstadoEBioma
+        .filter(item => nomeEstado(item.estado) === estadoEscolhido)
+        .map(item => [item.bioma, item.focos]);
+      totalFiltrado = listaBiomas.reduce((soma, item) => soma + item[1], 0);
+      listaEstados = totalFiltrado ? [[estadoEscolhido, totalFiltrado]] : [];
+    }
+  }
+
+  listaEstados = listaEstados.sort((a, b) => b[1] - a[1]).slice(0, 10);
+
   if (graficoEstados) graficoEstados.destroy();
   graficoEstados = new Chart(pegar('graficoEstados'), {
     type: 'bar',
     data: {
       labels: listaEstados.map(item => item[0]),
-      datasets: [{ data: listaEstados.map(item => item[1]), backgroundColor: '#f47745', borderRadius: 7 }]
+      datasets: [{
+        label: 'Focos de calor',
+        data: listaEstados.map(item => item[1]),
+        backgroundColor: '#f47745',
+        borderRadius: 7
+      }]
     },
-    options: { ...opcoesGrafico(), indexAxis: 'y', scales: { x: { beginAtZero: true }, y: { grid: { display: false } } } }
-  });
-  pegar('avisoEstados').hidden = focos.length > 0;
-
-  const listaBiomas = Object.entries(biomas);
-  if (graficoBiomas) graficoBiomas.destroy();
-  if (listaBiomas.length) {
-    graficoBiomas = new Chart(pegar('graficoBiomas'), {
-      type: 'doughnut',
-      data: {
-        labels: listaBiomas.map(item => item[0]),
-        datasets: [{ data: listaBiomas.map(item => item[1]), backgroundColor: cores, borderWidth: 3, borderColor: '#fff' }]
+    options: {
+      ...opcoesGrafico(),
+      indexAxis: 'y',
+      scales: {
+        x: {
+          beginAtZero: true,
+          title: { display: true, text: 'Quantidade de focos de calor' }
+        },
+        y: {
+          grid: { display: false },
+          title: { display: true, text: 'Estado' }
+        }
       },
-      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
-    });
-  }
-  pegar('avisoBiomas').hidden = listaBiomas.length > 0;
-  pegar('resultadoImportacao').textContent = `${filtrados.length.toLocaleString('pt-BR')} registros no filtro (${focos.length.toLocaleString('pt-BR')} importados).`;
-}
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: contexto => `${contexto.parsed.x.toLocaleString('pt-BR')} focos`
+          }
+        }
+      }
+    }
+  });
 
-async function importarCSV(arquivo) {
-  try {
-    focos = lerCSV(await arquivo.text());
-    if (!focos.length) throw new Error('O arquivo não tem registros válidos.');
-    mostrarFocos();
-  } catch (erro) {
-    pegar('resultadoImportacao').textContent = erro.message;
-  }
+  if (graficoBiomas) graficoBiomas.destroy();
+  graficoBiomas = new Chart(pegar('graficoBiomas'), {
+    type: 'doughnut',
+    data: {
+      labels: listaBiomas.map(item => item[0]),
+      datasets: [{
+        data: listaBiomas.map(item => item[1]),
+        backgroundColor: cores,
+        borderWidth: 3,
+        borderColor: '#fff'
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'bottom' },
+        tooltip: {
+          callbacks: {
+            label: contexto => {
+              const total = contexto.dataset.data.reduce((soma, valor) => soma + valor, 0);
+              const quantidade = contexto.parsed;
+              const percentual = total ? (quantidade / total * 100) : 0;
+              return `${contexto.label}: ${quantidade.toLocaleString('pt-BR')} focos (${percentual.toFixed(1).replace('.', ',')}%)`;
+            }
+          }
+        }
+      }
+    }
+  });
+
+  const semDados = !anoIncluido || totalFiltrado === 0;
+  pegar('avisoEstados').hidden = !semDados;
+  pegar('avisoBiomas').hidden = !semDados;
+  pegar('avisoEstados').textContent = `Sem dados de focos para ${estadoEscolhido} no período selecionado. A base disponível contém dados de ${dadosFocos.ano}.`;
+  pegar('avisoBiomas').textContent = `Sem dados de biomas para ${estadoEscolhido} no período selecionado. A base disponível contém dados de ${dadosFocos.ano}.`;
+  pegar('resultadoImportacao').textContent =
+    `${totalFiltrado.toLocaleString('pt-BR')} focos de calor em ${dadosFocos.ano} · Fonte: INPE.`;
 }
 
 function usarBack4App() {
@@ -282,9 +343,6 @@ async function excluirNota(id) {
 }
 
 pegar('filtrar').addEventListener('click', () => { buscarTemperatura(); mostrarFocos(); });
-pegar('arquivoCSV').addEventListener('change', evento => {
-  if (evento.target.files[0]) importarCSV(evento.target.files[0]);
-});
 pegar('formNota').addEventListener('submit', salvarNota);
 pegar('cancelar').addEventListener('click', () => {
   pegar('formNota').reset();
@@ -298,4 +356,5 @@ document.querySelectorAll('#menu a').forEach(link => link.addEventListener('clic
 prepararAnos();
 pegar('notaData').value = new Date().toISOString().slice(0, 10);
 buscarTemperatura();
+carregarFocos();
 carregarNotas();

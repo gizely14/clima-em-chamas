@@ -54,10 +54,10 @@
       </div>
       <div class="graficos">
         <article class="cartao-grafico grande"><div class="cartao-titulo"><div><span>CLIMA</span><h3>Temperatura média por ano</h3><p>Média anual da temperatura do ar a 2 metros</p></div><b>°C</b></div><div class="grafico"><canvas id="graficoTemperatura"></canvas></div><small>Fonte: Open-Meteo · dados históricos ERA5</small></article>
-        <article class="cartao-grafico"><div class="cartao-titulo"><div><span>FOCOS DE CALOR</span><h3>Registros por estado</h3><p>Quantidade de focos no arquivo importado</p></div><b>FOCOS</b></div><div class="grafico"><canvas id="graficoEstados"></canvas><div class="aviso-grafico" id="avisoEstados">Importe um CSV do INPE para visualizar os dados.</div></div><small>Fonte: Programa Queimadas · INPE</small></article>
-        <article class="cartao-grafico"><div class="cartao-titulo"><div><span>BIODIVERSIDADE</span><h3>Focos por bioma</h3><p>Distribuição dos registros por bioma</p></div><b>%</b></div><div class="grafico"><canvas id="graficoBiomas"></canvas><div class="aviso-grafico" id="avisoBiomas">Importe um CSV com a coluna de bioma.</div></div><small>Fonte: Programa Queimadas · INPE</small></article>
+        <article class="cartao-grafico"><div class="cartao-titulo"><div><span>FOCOS DE CALOR</span><h3>Registros por estado</h3><p>Quantidade de focos de calor detectados em 2025</p></div><b>FOCOS</b></div><div class="grafico"><canvas id="graficoEstados"></canvas><div class="aviso-grafico" id="avisoEstados">Carregando dados oficiais do INPE...</div></div><small>Fonte: Programa Queimadas · INPE</small></article>
+        <article class="cartao-grafico"><div class="cartao-titulo"><div><span>BIODIVERSIDADE</span><h3>Focos por bioma</h3><p>Distribuição dos registros por bioma</p></div><b>%</b></div><div class="grafico"><canvas id="graficoBiomas"></canvas><div class="aviso-grafico" id="avisoBiomas">Carregando dados oficiais do INPE...</div></div><small>Fonte: Programa Queimadas · INPE</small></article>
       </div>
-      <div class="importar"><div><h3>Tem um arquivo do INPE?</h3><p>Importe um CSV com os registros de focos de calor para preencher os gráficos de queimadas.</p></div><label class="botao secundario">Selecionar CSV<input type="file" id="arquivoCSV" accept=".csv,text/csv" hidden></label><span id="resultadoImportacao"></span></div>
+      <div class="importar"><div><h3>Dados oficiais do INPE</h3><p>Os gráficos de focos de calor são preenchidos automaticamente com a base de referência de 2025.</p></div><span id="resultadoImportacao">Carregando dados...</span></div>
     </section>
 
     <section class="secao biomas" id="biomas">
