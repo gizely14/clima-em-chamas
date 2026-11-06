@@ -6,14 +6,7 @@
 @media(max-width:800px){.topo{padding:0 22px}.menu-mobile{display:block}nav{display:none;position:absolute;top:75px;left:0;right:0;background:white;padding:20px;flex-direction:column;gap:18px;border-bottom:1px solid var(--linha)}nav.aberto{display:flex}.inicio{grid-template-columns:1fr;padding-top:45px}.inicio-texto{padding:0 5px 30px}.paisagem{height:300px}.chamadas{grid-template-columns:1fr 1fr;margin-bottom:55px}.filtros{flex-wrap:wrap}.filtros label{min-width:28%}.biomas{margin:0 -24px;padding:55px 24px}.bioma-lista{grid-template-columns:1fr 1fr}.eventos-layout{grid-template-columns:1fr}.fontes-lista{grid-template-columns:1fr 1fr}footer{flex-wrap:wrap}}
 @media(max-width:520px){main{padding:0 17px}.inicio h1{font-size:42px}.paisagem{height:240px}.chamadas{gap:10px}.chamadas article{padding:16px}.chamadas p{font-size:12px}.titulo-secao{align-items:start}.desenho-sol,.desenho-folha,.desenho-caderno{width:65px;height:65px;font-size:42px;flex-shrink:0;margin-left:10px}.filtros label{min-width:42%}.filtros .botao{width:100%}.graficos{grid-template-columns:1fr}.cartao-grafico.grande{grid-column:auto}.graficos .grafico{height:240px}.bioma-lista,.fontes-lista{grid-template-columns:1fr 1fr}.bioma-card{padding:14px}.lista-topo{align-items:stretch;flex-direction:column}.lista-topo input{max-width:none}footer{padding:25px 18px;flex-direction:column;align-items:flex-start}footer p{margin:0}}
 
-body {
-  background: linear-gradient(
-    135deg,
-    #F5F1E8 0%,
-    #F2F6EF 50%,
-    #EAF4F1 100%
-  );
-}
+
 
 .topo {
   box-shadow: 0 5px 20px #164b6210;
@@ -44,6 +37,7 @@ body {
 .sol {
   box-shadow: 0 0 0 16px #ffdf9a55, 0 0 35px #ffc45c66;
 }
+
 
 .chamadas article {
   transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
@@ -126,7 +120,6 @@ body {
   box-shadow: 0 3px 10px #43866d18;
 }
 
-
 .importar {
   background: linear-gradient(110deg, #fff1e8, #fff8ed);
   border: 1px solid #f8dfd0;
@@ -205,13 +198,16 @@ footer {
 
 
 
-
 body {
-  background-color: #f1f8f6;
-  background-image:
-    radial-gradient(ellipse at 8% 12%, #dff4f6a8 0, transparent 29%),
-    radial-gradient(ellipse at 92% 38%, #e7f4e988 0, transparent 27%),
-    linear-gradient(180deg, #f7fbf8 0%, #eff7f5 48%, #f8faf6 100%);
+  margin: 0;
+  background: linear-gradient(
+    135deg,
+    #F5F1E8 0%,
+    #F2F6EF 50%,
+    #EAF4F1 100%
+  );
+  color: var(--texto);
+  font-family: 'DM Sans', sans-serif;
   background-attachment: fixed;
 }
 
@@ -228,7 +224,7 @@ main {
   border-top-color: #dcebe8;
 }
 
-/
+
 .chamadas article,
 .cartao-grafico,
 .lista-eventos,
@@ -341,7 +337,6 @@ main {
   align-self: center;
 }
 
-
 .biomas {
   position: relative;
   overflow: hidden;
@@ -392,6 +387,7 @@ main {
 .pantanal::after {
   color: #3986b128;
 }
+
 
 .icone,
 .desenho-sol,
