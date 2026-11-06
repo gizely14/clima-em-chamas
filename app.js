@@ -11,8 +11,8 @@ const locais = {
 
 const back4app = {
   url: 'https://parseapi.back4app.com',
-  appId: 'SEU_APP_ID',
-  chave: 'SUA_JAVASCRIPT_KEY',
+  appId: 'Mn1Xl55Rn5FvR6lgeaqoVHbZuoI6rydvBtvpp8BO',
+  chave: 'X9P8HR53sFONumFyBnoVbyAqsl9z9rW9aWJjUpuX',
   classe: 'Anotacoes'
 };
 
