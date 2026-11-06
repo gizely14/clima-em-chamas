@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clima em Chamas | Brasil</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header class="topo">
+    <a class="marca" href="#inicio"><span class="marca-icone">✳</span> clima em <b>chamas</b></a>
+    <button class="menu-mobile" id="menuMobile">☰</button>
+    <nav id="menu">
+      <a href="#inicio">Início</a>
+      <a href="#analises">Análises</a>
+      <a href="#biomas">Biomas</a>
+      <a href="#eventos">Eventos</a>
+      <a href="#fontes">Fontes</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="inicio" id="inicio">
+      <div class="inicio-texto">
+        <span class="etiqueta">UM OLHAR SOBRE O BRASIL</span>
+        <h1>O clima muda.<br><span>A natureza sente.</span></h1>
+        <p>Explore informações sobre temperatura e queimadas no Brasil. Conheça os biomas, acompanhe os dados e registre acontecimentos importantes.</p>
+        <a class="botao" href="#analises">Explorar os dados <span>→</span></a>
+        <div class="mini-info"><span>●</span> Informações de fontes públicas</div>
+      </div>
+      <div class="paisagem" aria-label="Ilustração de uma paisagem brasileira com rio, árvores, sol e uma área de floresta em chamas">
+        <div class="sol"></div><div class="nuvem nuvem1"></div><div class="nuvem nuvem2"></div>
+        <div class="montanha montanha1"></div><div class="montanha montanha2"></div>
+        <div class="rio"></div><div class="arvore arvore1"></div><div class="arvore arvore2"></div>
+        <div class="fogo">♨</div><div class="folha folha1">✦</div><div class="folha folha2">✦</div>
+      </div>
+    </section>
+
+    <section class="chamadas">
+      <article><span class="icone azul">☼</span><h3>Temperatura</h3><p>Acompanhe as condições do clima e as mudanças ao longo dos anos.</p></article>
+      <article><span class="icone laranja">♨</span><h3>Queimadas</h3><p>Observe os focos de calor registrados em diferentes estados.</p></article>
+      <article><span class="icone verde">❧</span><h3>Biomas</h3><p>Conheça os biomas brasileiros e a distribuição dos registros.</p></article>
+      <article><span class="icone roxo">✎</span><h3>Registros</h3><p>Adicione observações sobre acontecimentos ambientais.</p></article>
+    </section>
+
+    <section class="secao" id="analises">
+      <div class="titulo-secao"><div><span class="etiqueta">NÚMEROS E DESCOBERTAS</span><h2>O que os dados mostram?</h2><p>Consulte os gráficos e compare informações por localidade e período.</p></div><div class="desenho-sol">☀</div></div>
+      <div class="filtros">
+        <label>Localidade<select id="estado"><option value="Brasil">Brasil (Brasília)</option><option value="Amazonas">Amazonas</option><option value="Pará">Pará</option><option value="Pernambuco">Pernambuco</option><option value="Mato Grosso">Mato Grosso</option><option value="São Paulo">São Paulo</option><option value="Bahia">Bahia</option><option value="Rondônia">Rondônia</option></select></label>
+        <label>Ano inicial<select id="anoInicio"></select></label>
+        <label>Ano final<select id="anoFim"></select></label>
+        <button class="botao pequeno" id="filtrar">Atualizar</button>
+      </div>
+      <div class="graficos">
+        <article class="cartao-grafico grande"><div class="cartao-titulo"><div><span>CLIMA</span><h3>Temperatura média por ano</h3><p>Média anual da temperatura do ar a 2 metros</p></div><b>°C</b></div><div class="grafico"><canvas id="graficoTemperatura"></canvas></div><small>Fonte: Open-Meteo · dados históricos ERA5</small></article>
+        <article class="cartao-grafico"><div class="cartao-titulo"><div><span>FOCOS DE CALOR</span><h3>Registros por estado</h3><p>Quantidade de focos no arquivo importado</p></div><b>FOCOS</b></div><div class="grafico"><canvas id="graficoEstados"></canvas><div class="aviso-grafico" id="avisoEstados">Importe um CSV do INPE para visualizar os dados.</div></div><small>Fonte: Programa Queimadas · INPE</small></article>
+        <article class="cartao-grafico"><div class="cartao-titulo"><div><span>BIODIVERSIDADE</span><h3>Focos por bioma</h3><p>Distribuição dos registros por bioma</p></div><b>%</b></div><div class="grafico"><canvas id="graficoBiomas"></canvas><div class="aviso-grafico" id="avisoBiomas">Importe um CSV com a coluna de bioma.</div></div><small>Fonte: Programa Queimadas · INPE</small></article>
+      </div>
+      <div class="importar"><div><h3>Tem um arquivo do INPE?</h3><p>Importe um CSV com os registros de focos de calor para preencher os gráficos de queimadas.</p></div><label class="botao secundario">Selecionar CSV<input type="file" id="arquivoCSV" accept=".csv,text/csv" hidden></label><span id="resultadoImportacao"></span></div>
+    </section>
+
+    <section class="secao biomas" id="biomas">
+      <div class="titulo-secao"><div><span class="etiqueta">RIQUEZA NATURAL</span><h2>Seis biomas, muitas histórias.</h2><p>Cada região tem características próprias e enfrenta diferentes desafios ambientais.</p></div><div class="desenho-folha">❧</div></div>
+      <div class="bioma-lista">
+        <article class="bioma-card amazonia"><div class="bioma-desenho">🌳</div><h3>Amazônia</h3><p>Floresta tropical com grande diversidade de espécies e rios extensos.</p></article>
+        <article class="bioma-card cerrado"><div class="bioma-desenho">🌾</div><h3>Cerrado</h3><p>Savana brasileira com árvores retorcidas e períodos de seca.</p></article>
+        <article class="bioma-card caatinga"><div class="bioma-desenho">🌵</div><h3>Caatinga</h3><p>Vegetação adaptada ao clima semiárido do Nordeste.</p></article>
+        <article class="bioma-card mata"><div class="bioma-desenho">🍃</div><h3>Mata Atlântica</h3><p>Bioma de grande biodiversidade, presente em áreas muito povoadas.</p></article>
+        <article class="bioma-card pantanal"><div class="bioma-desenho">🦜</div><h3>Pantanal</h3><p>Uma das maiores áreas úmidas continentais do planeta.</p></article>
+        <article class="bioma-card pampa"><div class="bioma-desenho">🌱</div><h3>Pampa</h3><p>Campos naturais que ocupam parte do território do Rio Grande do Sul.</p></article>
+      </div>
+    </section>
+
+    <section class="secao eventos" id="eventos">
+      <div class="titulo-secao"><div><span class="etiqueta">CADERNO AMBIENTAL</span><h2>Acompanhe e registre acontecimentos.</h2><p>Crie anotações relacionadas ao clima, às queimadas e aos biomas.</p></div><div class="desenho-caderno">✎</div></div>
+      <div class="eventos-layout">
+        <div class="lista-eventos"><div class="lista-topo"><h3>Registros da equipe</h3><input id="busca" type="search" placeholder="Buscar anotação..."></div><div id="listaNotas"></div><p class="vazio" id="semNotas">Nenhuma anotação cadastrada.</p></div>
+        <form class="form-evento" id="formNota"><h3 id="tituloFormulario">Nova anotação</h3><input type="hidden" id="notaId"><label>Título<input id="notaTitulo" required maxlength="80" placeholder="Ex.: Período de seca"></label><label>Data<input id="notaData" type="date" required></label><label>Localidade<input id="notaLocal" required placeholder="Ex.: Pernambuco"></label><label>Categoria<select id="notaCategoria"><option>Seca</option><option>Queimada</option><option>Onda de calor</option><option>Observação</option></select></label><label>Descrição<textarea id="notaDescricao" required rows="4" placeholder="Descreva o acontecimento..."></textarea></label><div class="botoes-form"><button class="botao pequeno" type="submit">Salvar registro</button><button class="botao texto" type="button" id="cancelar">Cancelar</button></div><small id="statusApi">Os registros ficam salvos neste navegador. Configure o Back4App para sincronizar pela API.</small></form>
+      </div>
+    </section>
+
+    <section class="secao fontes" id="fontes">
+      <div class="titulo-secao"><div><span class="etiqueta">DE ONDE VÊM OS DADOS?</span><h2>Fontes para explorar mais.</h2><p>O projeto utiliza serviços públicos e dados abertos para apresentar as informações.</p></div></div>
+      <div class="fontes-lista"><a href="https://open-meteo.com/" target="_blank"><b>Open-Meteo</b><span>Dados meteorológicos atuais e históricos.</span><strong>Acessar ↗</strong></a><a href="https://terrabrasilis.dpi.inpe.br/queimadas/portal/" target="_blank"><b>INPE — Programa Queimadas</b><span>Informações sobre focos de calor no Brasil.</span><strong>Acessar ↗</strong></a><a href="https://www.back4app.com/" target="_blank"><b>Back4App</b><span>Serviço para armazenar as anotações do projeto.</span><strong>Acessar ↗</strong></a></div>
+    </section>
+  </main>
+
+  <footer><a class="marca" href="#inicio"><span class="marca-icone">✳</span> clima em <b>chamas</b></a><p>Projeto acadêmico · Dados de fontes públicas</p><a href="#inicio">Voltar ao início ↑</a></footer>
+  <script src="app.js"></script>
+</body>
+</html>
