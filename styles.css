@@ -7,9 +7,7 @@
 @media(max-width:520px){main{padding:0 17px}.inicio h1{font-size:42px}.paisagem{height:240px}.chamadas{gap:10px}.chamadas article{padding:16px}.chamadas p{font-size:12px}.titulo-secao{align-items:start}.desenho-sol,.desenho-folha,.desenho-caderno{width:65px;height:65px;font-size:42px;flex-shrink:0;margin-left:10px}.filtros label{min-width:42%}.filtros .botao{width:100%}.graficos{grid-template-columns:1fr}.cartao-grafico.grande{grid-column:auto}.graficos .grafico{height:240px}.bioma-lista,.fontes-lista{grid-template-columns:1fr 1fr}.bioma-card{padding:14px}.lista-topo{align-items:stretch;flex-direction:column}.lista-topo input{max-width:none}footer{padding:25px 18px;flex-direction:column;align-items:flex-start}footer p{margin:0}}
 
 
-/* ===== Melhorias visuais: mais cor, sem mudar a paleta ===== */
 
-/* Cabeçalho com acabamento mais marcante */
 .topo {
   box-shadow: 0 5px 20px #164b6210;
   border-bottom: 2px solid var(--azul2);
@@ -18,7 +16,7 @@
   filter: drop-shadow(0 3px 5px #f4774533);
 }
 
-/* Hero: mais profundidade na paisagem */
+
 .inicio {
   position: relative;
 }
@@ -40,7 +38,6 @@
   box-shadow: 0 0 0 16px #ffdf9a55, 0 0 35px #ffc45c66;
 }
 
-/* Cards de destaque: fundos coloridos e interação */
 .chamadas article {
   transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
 }
@@ -65,7 +62,7 @@
   box-shadow: 0 5px 12px #164b6210;
 }
 
-/* Seções e títulos */
+
 .secao {
   position: relative;
 }
@@ -81,7 +78,7 @@
   box-shadow: 0 10px 24px #164b6210;
 }
 
-/* Filtros com mais presença */
+
 .filtros {
   background: linear-gradient(110deg, #eff8f7, #dff4f6);
   border: 1px solid #dcebea;
@@ -96,7 +93,7 @@
   outline-offset: 1px;
 }
 
-/* Gráficos */
+
 .cartao-grafico {
   box-shadow: 0 8px 24px #164b6209;
   transition: transform .2s ease, box-shadow .2s ease;
@@ -122,14 +119,14 @@
   box-shadow: 0 3px 10px #43866d18;
 }
 
-/* Importação */
+
 .importar {
   background: linear-gradient(110deg, #fff1e8, #fff8ed);
   border: 1px solid #f8dfd0;
   box-shadow: 0 8px 22px #f4774510;
 }
 
-/* Área dos biomas */
+
 .biomas {
   background: linear-gradient(135deg, #f5faf5, #eff8f7);
 }
@@ -148,7 +145,7 @@
 .pantanal { background: linear-gradient(180deg, #eaf0fa 0, #fff 42%); }
 .pampa { background: linear-gradient(180deg, #f0eaff 0, #fff 42%); }
 
-/* Eventos e fontes */
+
 .lista-eventos,
 .form-evento,
 .fontes-lista a {
@@ -172,7 +169,7 @@
   transform: translateY(-1px);
 }
 
-/* Botões */
+
 .botao {
   box-shadow: 0 7px 16px #f4774538;
   transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
@@ -184,17 +181,264 @@
   box-shadow: 0 4px 12px #f4774510;
 }
 
-/* Rodapé com mais contraste, mantendo os tons atuais */
+
 footer {
   background: linear-gradient(110deg, #eaf5f2, #dff4f6);
   border-top: 1px solid #dcebea;
 }
 
-/* Respeita usuários que preferem menos animações */
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     scroll-behavior: auto !important;
     transition-duration: .01ms !important;
     animation-duration: .01ms !important;
+  }
+}
+
+
+
+
+body {
+  background-color: #f1f8f6;
+  background-image:
+    radial-gradient(ellipse at 8% 12%, #dff4f6a8 0, transparent 29%),
+    radial-gradient(ellipse at 92% 38%, #e7f4e988 0, transparent 27%),
+    linear-gradient(180deg, #f7fbf8 0%, #eff7f5 48%, #f8faf6 100%);
+  background-attachment: fixed;
+}
+
+
+.topo {
+  background: #ffffffed;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 7px 25px #164b6214;
+}
+main {
+  position: relative;
+}
+.secao {
+  border-top-color: #dcebe8;
+}
+
+/
+.chamadas article,
+.cartao-grafico,
+.lista-eventos,
+.form-evento,
+.fontes-lista a {
+  box-shadow: 0 12px 28px #164b6214, 0 2px 7px #164b6208;
+}
+.chamadas article:hover,
+.cartao-grafico:hover,
+.bioma-card:hover,
+.fontes-lista a:hover {
+  box-shadow: 0 18px 34px #164b6220, 0 5px 12px #164b620c;
+}
+.filtros,
+.importar {
+  box-shadow: 0 12px 25px #164b6212;
+}
+
+
+.inicio {
+  isolation: isolate;
+}
+.inicio::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: 190px;
+  height: 190px;
+  left: -85px;
+  top: 20px;
+  border: 2px solid #43866d20;
+  border-radius: 58% 42% 65% 35%;
+  transform: rotate(28deg);
+  box-shadow:
+    18px 18px 0 -7px #dff4f680,
+    36px 36px 0 -15px #f4774520;
+}
+.inicio::after {
+  content: "✦";
+  position: absolute;
+  z-index: -1;
+  right: 2%;
+  top: 15px;
+  color: #f4774570;
+  font-size: 34px;
+  text-shadow: 25px 38px 0 #43866d55, -35px 70px 0 #f4774545;
+}
+
+
+.paisagem::before {
+  content: "✦";
+  position: absolute;
+  z-index: 2;
+  top: 22%;
+  left: 22%;
+  color: #ffffffc9;
+  font-size: 22px;
+  text-shadow: 115px 38px 0 #ffffffb5, 205px -5px 0 #ffffffa8;
+  pointer-events: none;
+}
+.paisagem::after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  right: 8%;
+  bottom: 10%;
+  width: 38px;
+  height: 58px;
+  border-radius: 100% 0 100% 0;
+  border: 3px solid #eaf8dfb8;
+  transform: rotate(28deg);
+  box-shadow: -22px 18px 0 -8px #eaf8dfb0;
+  pointer-events: none;
+}
+
+
+.chamadas article {
+  position: relative;
+  overflow: hidden;
+}
+.chamadas article::after {
+  content: "";
+  position: absolute;
+  width: 76px;
+  height: 76px;
+  right: -27px;
+  bottom: -31px;
+  border: 10px solid #43866d12;
+  border-radius: 65% 35% 60% 40%;
+  transform: rotate(-25deg);
+  pointer-events: none;
+}
+.chamadas article:nth-child(2)::after {
+  border-color: #f4774518;
+  border-radius: 50%;
+}
+.chamadas article:nth-child(4)::after {
+  border-color: #9270bb20;
+}
+
+
+.titulo-secao {
+  position: relative;
+}
+.titulo-secao::after {
+  content: "❋";
+  color: #43866d55;
+  font-size: 27px;
+  margin-left: 12px;
+  align-self: center;
+}
+
+
+.biomas {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 8% 15%, #dff4f6 0, transparent 24%),
+    radial-gradient(circle at 92% 85%, #e7f4e9 0, transparent 26%),
+    linear-gradient(135deg, #f4faf5, #edf7f4);
+}
+.biomas::before,
+.biomas::after {
+  content: "";
+  position: absolute;
+  width: 110px;
+  height: 150px;
+  border: 2px solid #43866d18;
+  border-radius: 100% 0 100% 0;
+  pointer-events: none;
+}
+.biomas::before {
+  top: 18px;
+  right: 4%;
+  transform: rotate(25deg);
+}
+.biomas::after {
+  bottom: 12px;
+  left: 2%;
+  transform: rotate(-35deg) scale(.7);
+}
+.bioma-card {
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 23px #164b6210;
+}
+.bioma-card::after {
+  content: "❧";
+  position: absolute;
+  right: 10px;
+  bottom: -13px;
+  color: #43866d25;
+  font-size: 52px;
+  transform: rotate(-18deg);
+  pointer-events: none;
+}
+.cerrado::after,
+.caatinga::after {
+  color: #f4774528;
+}
+.pantanal::after {
+  color: #3986b128;
+}
+
+.icone,
+.desenho-sol,
+.desenho-folha,
+.desenho-caderno {
+  box-shadow: 0 9px 20px #164b6218, inset 0 1px 0 #ffffffb5;
+}
+.desenho-sol {
+  background: radial-gradient(circle at 35% 30%, #fff8e8, #fff2d9 72%);
+}
+.desenho-folha {
+  background: radial-gradient(circle at 35% 30%, #f5fff4, #e8f5e9 72%);
+}
+.desenho-caderno {
+  background: radial-gradient(circle at 35% 30%, #fff8f2, #fff0e8 72%);
+}
+
+
+footer {
+  background:
+    radial-gradient(circle at 90% 10%, #dff4f6 0, transparent 35%),
+    linear-gradient(110deg, #eaf5f2, #e3f2ef);
+  box-shadow: 0 -8px 25px #164b6208;
+}
+
+
+@media (max-width: 800px) {
+  .inicio::before {
+    width: 120px;
+    height: 120px;
+    left: -65px;
+  }
+  .inicio::after {
+    right: 5%;
+    top: 5px;
+  }
+  .titulo-secao::after {
+    font-size: 21px;
+  }
+  .biomas::before {
+    right: -35px;
+  }
+}
+@media (max-width: 520px) {
+  body {
+    background-attachment: scroll;
+  }
+  .inicio::before {
+    opacity: .6;
+  }
+  .inicio::after {
+    font-size: 25px;
+  }
+  .titulo-secao::after {
+    display: none;
   }
 }
